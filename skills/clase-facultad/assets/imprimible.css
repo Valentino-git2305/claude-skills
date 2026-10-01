@@ -1,0 +1,94 @@
+/* Versión imprimible (A4). Pensada para leer en papel: serif, buen interlineado, sin colores de fondo pesados. */
+@page {
+  size: A4;
+  margin: 18mm 17mm 20mm 17mm;
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8.5pt/1 "Helvetica Neue", Arial, sans-serif; color: #777; }
+  @bottom-left { font: 8.5pt/1 "Helvetica Neue", Arial, sans-serif; color: #777; }
+}
+@page :first { @bottom-left { content: none; } }
+
+:root { --tinta: #1d1d1f; --suave: #5b5b62; --linea: #d9d6cf; --acento: #8a3b12; --acento-suave: #f6ece4; --profe: #1f4e79; --profe-suave: #eaf1f8; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; color: var(--tinta); font: 10.5pt/1.55 "Georgia", "Times New Roman", serif; background: #fff; }
+@media screen { body { max-width: 780px; margin: 32px auto; padding: 0 24px; } }
+
+h1, h2, h3, h4, h5, .materia, .meta, .badge, .tipo, .profe-titulo, .ref, th { font-family: "Helvetica Neue", Arial, sans-serif; }
+h1 { font-size: 24pt; line-height: 1.15; margin: 4pt 0 6pt; letter-spacing: -0.01em; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.2pt solid var(--tinta); break-after: avoid; }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; break-after: avoid; }
+h4, h5 { font-size: 10.5pt; margin: 10pt 0 3pt; break-after: avoid; }
+p { margin: 0 0 6pt; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 6pt; padding-left: 18pt; }
+li { margin: 1.5pt 0; }
+a { color: inherit; }
+code { font: 9pt "Menlo", "Consolas", monospace; background: #f3f1ec; padding: 0 2pt; border-radius: 2pt; }
+pre { background: #f6f4ef; border: 0.6pt solid var(--linea); padding: 6pt 8pt; border-radius: 3pt; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 2.5pt solid var(--linea); color: #333; }
+.math-block { margin: 8pt 0; text-align: center; }
+.table-wrap { margin: 6pt 0 8pt; }
+table { border-collapse: collapse; width: 100%; font-size: 9.5pt; break-inside: avoid; }
+th, td { border: 0.6pt solid var(--linea); padding: 3pt 6pt; text-align: left; vertical-align: top; }
+th { background: #f3f1ec; font-size: 9pt; }
+
+.portada { border-bottom: 2.5pt solid var(--tinta); padding-bottom: 10pt; margin-bottom: 6pt; }
+.materia { text-transform: uppercase; letter-spacing: 0.12em; font-size: 9pt; color: var(--acento); font-weight: 700; }
+.meta { color: var(--suave); font-size: 10pt; }
+.archivos { color: var(--suave); font-size: 9pt; margin-top: 3pt; font-style: italic; }
+
+.resumen { font-size: 11pt; }
+.indice ol { columns: 2; column-gap: 20pt; font-size: 10pt; }
+.indice li { break-inside: avoid; }
+
+.badge { display: inline-block; font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--acento); border: 0.8pt solid var(--acento); border-radius: 8pt; padding: 0.5pt 5pt; vertical-align: middle; }
+.seccion h2 .num { color: var(--suave); font-weight: 400; }
+.seccion.importante h2 { border-bottom-color: var(--acento); }
+.ref { display: block; margin: -3pt 0 6pt; font-size: 8.5pt; color: var(--suave); }
+
+.profe { margin: 8pt 0 4pt; padding: 6pt 10pt; background: var(--profe-suave); border-left: 2.5pt solid var(--profe); border-radius: 0 3pt 3pt 0; break-inside: avoid; }
+.profe-titulo { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--profe); margin-bottom: 2pt; }
+.profe ul { margin: 0; }
+
+.frase { margin: 6pt 0; padding: 5pt 10pt; border-left: 2.5pt solid var(--profe); background: #fafafa; break-inside: avoid; }
+.frase p { margin: 2pt 0; font-style: italic; }
+.frase .tipo { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--profe); }
+.frase .ctx { font-size: 8.5pt; color: var(--suave); }
+.frase.t-parcial { border-left-color: var(--acento); background: var(--acento-suave); }
+.frase.t-parcial .tipo { color: var(--acento); }
+.frase.t-advertencia { border-left-color: #a07000; }
+.frase.t-advertencia .tipo { color: #a07000; }
+.frase.t-no_se_toma { border-left-color: #888; }
+.frase.t-no_se_toma .tipo { color: #666; }
+
+.glosario dl { margin: 0; }
+.termino { break-inside: avoid; padding: 3pt 0; border-bottom: 0.5pt dotted var(--linea); }
+.termino dt { font-weight: 700; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10pt; }
+.termino dd { margin: 1pt 0 0 12pt; }
+.termino dd p { margin: 0; }
+
+.duda { break-inside: avoid; margin-bottom: 8pt; }
+.duda h3 { margin-top: 6pt; }
+
+.nota { color: var(--suave); font-size: 9pt; font-style: italic; }
+.preguntas > ol > li { break-inside: avoid; margin-bottom: 6pt; }
+.preguntas .q { font-weight: 700; }
+.preguntas .q p, .preguntas .a p { margin: 0; }
+.preguntas .a { margin-top: 2pt; padding-left: 8pt; border-left: 1.5pt solid var(--linea); color: #333; }
+
+.quiz { break-before: page; }
+.quiz .pregunta { break-inside: avoid; margin-bottom: 8pt; }
+.quiz .pregunta > p { margin-bottom: 2pt; }
+.opciones { padding-left: 16pt; }
+
+.caja { border: 0.8pt solid var(--linea); border-radius: 4pt; padding: 2pt 12pt 6pt; margin-top: 14pt; break-inside: avoid; }
+.caja h2 { border-bottom: none; margin-top: 8pt; }
+.check { list-style: none; padding-left: 4pt; }
+.check li::before { content: "☐  "; }
+
+.clave { break-before: page; font-size: 9.5pt; }
+.clave li { margin-bottom: 5pt; break-inside: avoid; }
+.clave .expl { color: var(--suave); }
+.clave .expl p { margin: 0; }
+
+.katex { font-size: 1.05em; }
