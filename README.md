@@ -1,91 +1,176 @@
-# Claude Skills
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.webp">
+  <img alt="claude-skills — Skills para Claude Code en español" src=".github/assets/banner-light.webp">
+</picture>
 
-Skills para [Claude Code](https://claude.com/claude-code) que voy creando. Cada skill vive en su carpeta dentro de `skills/`.
+<p align="center">
+  <a href="https://claude.com/claude-code"><img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-skills-b4532a?style=flat-square"></a>
+  <img alt="3 skills" src="https://img.shields.io/badge/skills-3-2563a6?style=flat-square">
+  <img alt="En español" src="https://img.shields.io/badge/idioma-espa%C3%B1ol-2f7d4f?style=flat-square">
+  <a href="LICENSE"><img alt="Licencia MIT" src="https://img.shields.io/github/license/Valentino-git2305/claude-skills?style=flat-square&color=6a655c"></a>
+  <a href="https://github.com/Valentino-git2305/claude-skills/commits/main"><img alt="Último commit" src="https://img.shields.io/github/last-commit/Valentino-git2305/claude-skills?style=flat-square&color=6a655c"></a>
+</p>
 
-## Skills disponibles
+<p align="center">
+  <a href="#-instalación-en-30-segundos">Instalación</a> ·
+  <a href="#-clase-facultad">clase-facultad</a> ·
+  <a href="#-tareas-facultad">tareas-facultad</a> ·
+  <a href="#-landing-page">landing-page</a> ·
+  <a href="#-preguntas-frecuentes">FAQ</a>
+</p>
 
-| Skill | Para qué sirve |
-|---|---|
-| [`clase-facultad`](skills/clase-facultad/) | Asistente en vivo para clases de la facu: le pasás los archivos de la clase, le vas contando lo que explica el profe, registra todo y al final genera un **HTML interactivo** (resumen, flashcards, autoevaluación, glosario, frases del profe) y un **PDF para imprimir**. |
-| [`landing-page`](skills/landing-page/) | Genera landing pages para clientes nuevos: pide marca, rubro y tono, **recomienda el stack** según el cliente, define la dirección visual con la skill `frontend-design`, escribe el copy, construye la landing (responsive, SEO, accesibilidad), la verifica con capturas y ofrece deploy. |
-| [`tareas-facultad`](skills/tareas-facultad/) | Junta en una sola planilla todo lo que tenés que entregar, aunque cada materia publique en un lugar distinto: **aula virtual, Slack, WhatsApp, repos de Git, mail de la facu**. Arma el Excel (o Google Sheets) con fechas, días restantes y de qué fuente salió cada dato, y cuando vas a encarar una entrega te busca la consigna y te **arma el prompt con todo el contexto**. |
+---
 
-## Cómo instalarlas
+### ¿Qué es una skill?
 
-Necesitás [Node.js](https://nodejs.org) (para `npx`) y Claude Code.
+Una **skill** es un paquete de instrucciones (y a veces scripts) que le enseña a Claude a hacer una tarea concreta siempre igual de bien. La instalás una vez y Claude la usa sola cuando le pedís algo relacionado: no hace falta explicarle todo de nuevo cada vez.
 
-**Una skill puntual, disponible en todas tus carpetas:**
+| | Skill | Qué hace | Para quién |
+|:-:|---|---|---|
+| 📚 | [**clase-facultad**](#-clase-facultad) | Toma apuntes en vivo mientras el profe explica y al final te arma un **HTML interactivo** y un **PDF** para estudiar | Estudiantes |
+| 🗓️ | [**tareas-facultad**](#-tareas-facultad) | Junta las entregas de **todas las materias y todas las plataformas** en una sola planilla | Estudiantes |
+| 🚀 | [**landing-page**](#-landing-page) | Arma landing pages para clientes: del brief al deploy, con stack recomendado y diseño propio | Freelancers |
+
+## ⚡ Instalación en 30 segundos
+
+Necesitás [Claude Code](https://claude.com/claude-code) y [Node.js](https://nodejs.org).
 
 ```bash
 npx skills add https://github.com/Valentino-git2305/claude-skills --skill clase-facultad --agent claude-code -g
 ```
 
-Para otra skill, cambiá el nombre después de `--skill` (ej. `--skill landing-page`).
+- Cambiá `clase-facultad` por `tareas-facultad` o `landing-page` para instalar otra, o por `'*'` para instalarlas todas.
+- `-g` la deja disponible en todas tus carpetas. Sin `-g`, solo en la carpeta donde estás.
+- Abrí una sesión nueva de Claude Code y listo.
 
-**Solo para la carpeta (proyecto) en la que estás:** el mismo comando sin `-g`.
+Para actualizar cuando haya novedades: `npx skills update`
 
-**Todas las skills del repo:** cambiá `--skill clase-facultad` por `--skill '*'`.
+---
 
-**Para actualizar** cuando haya cambios:
+## 📚 clase-facultad
 
-```bash
-npx skills update
+> *"Arranca la clase de Análisis II, hoy vemos gradiente"* — y le pasás el PDF de la clase.
+
+Mientras el profe explica, le vas escribiendo lo que dice (aunque sea abreviado y con errores). Claude **guarda todo al instante** y te contesta en 2-4 líneas: aclara, conecta con las diapositivas y marca lo que entra en el parcial. Al decir *"terminó la clase"* genera tu material de estudio:
+
+<img alt="Material interactivo generado por clase-facultad, en escritorio y en celular" src=".github/assets/clase-facultad-html.webp">
+
+<img alt="PDF para imprimir y autoevaluación con corrección al instante" src=".github/assets/clase-facultad-pdf-quiz.webp">
+
+**Qué trae el material**
+
+- 🧭 Resumen e índice de temas, con filtro *"solo lo del parcial"*
+- 🗣️ **Lo que dijo el profe**, destacado aparte de la explicación
+- 🃏 Flashcards con *"la sabía / a repasar"*
+- ✅ Autoevaluación de opción múltiple que corrige y explica
+- 📖 Glosario con buscador, dudas de la clase resueltas y checklist para repasar
+- 🌙 Modo oscuro, fórmulas en LaTeX y progreso guardado
+- 🖨️ PDF A4 con preguntas de repaso y las respuestas al final
+
+<details>
+<summary><b>Requisitos y detalles</b></summary>
+
+- Python 3 (sin librerías extra).
+- Chromium, Chrome, Edge o Brave para generar el PDF. Si no hay ninguno, genera una versión imprimible que guardás como PDF con Ctrl+P.
+- Internet al abrir el material, para que se vean las fórmulas.
+- No arranca hasta que le digas **materia y tema**. Todo queda en `~/Facultad/<Materia>/<fecha>-<tema>/`.
+- Si se corta la sesión, retoma la clase desde el registro guardado.
+
+</details>
+
+---
+
+## 🗓️ tareas-facultad
+
+> *"Revisá la cátedra y actualizá mis tareas"*
+
+Las materias no publican todas en el mismo lugar. Esta skill **barre todas las fuentes** y consolida lo pendiente en un Excel o Google Sheets.
+
+```mermaid
+flowchart LR
+    A[🏫 Aula virtual] --> P
+    B[💬 WhatsApp / Telegram] --> P
+    C[💼 Slack / Discord] --> P
+    D[🐙 Repos de Git] --> P
+    E[📧 Mail de la facu] --> P
+    P{{Claude}} --> X[📊 Planilla<br/>fechas · días · estado · fuente]
+    P --> Y[📝 Prompt listo<br/>para encarar una entrega]
 ```
 
-Después de instalar, abrí una sesión nueva de Claude Code para que la skill aparezca.
+- **Columna Fuente**: sabés de dónde salió cada dato y cuál puede estar desactualizado.
+- **Cambios desde la última corrida**, lo primero que ves al abrirla.
+- *"Dame un prompt para el TP de Redes"*: busca la consigna real, lee los adjuntos y te arma el prompt con todo el contexto.
 
-## clase-facultad
+<details>
+<summary><b>Requisitos y detalles</b></summary>
 
-### Requisitos
-- Python 3 (sin librerías extra).
-- Chromium, Google Chrome, Edge o Brave instalado para generar el PDF. Si no hay ninguno, la skill igual genera una versión imprimible en HTML que podés guardar como PDF con Ctrl+P.
-- Conexión a internet al abrir el material, para que las fórmulas matemáticas se vean bien (sin conexión se ven en LaTeX).
+- Python 3 con `openpyxl` (o el conector de Google Workspace para Sheets).
+- Navegador con las sesiones ya iniciadas (aula virtual, WhatsApp Web, mail). **Nunca ingresa contraseñas.**
+- La primera vez te pregunta qué materias cursás y dónde publica cada una; después lo recuerda.
 
-### Cómo se usa
-1. **Arrancá la clase** diciéndole la materia y el tema, y pasale los archivos: *"arranca la clase de Análisis II, hoy vemos gradiente"*. Si falta la materia o el tema, te lo pregunta antes de empezar.
-2. **Durante la clase**, escribile lo que va diciendo el profe (aunque sea abreviado). Lo guarda al instante en `registro.md` y te contesta en 2-4 líneas. Si el profe dice que algo entra en el parcial, queda marcado.
-3. **Al terminar**, decile *"terminó la clase"* y genera el HTML y el PDF.
+</details>
 
-Todo queda en `~/Facultad/<Materia>/<fecha>-<tema>/`.
+---
 
-## landing-page
+## 🚀 landing-page
 
-### Requisitos
-- Node.js (para `npx`): la skill instala sola la skill `frontend-design` si no la tenés, y usa Playwright para sacar capturas de verificación (la primera vez descarga su navegador).
-- Python 3 para levantar un servidor local en las landings de HTML simple.
-- Para el deploy, la CLI y la cuenta de la plataforma elegida (la skill te dice qué paso hacer si falta algo).
+> *"Creá una landing para un cliente nuevo"* o `/landing-page`
 
-### Cómo se usa
-1. Pedile *"crear una landing para un cliente nuevo"* o usá `/landing-page`. Te va a pedir **nombre/marca, rubro y tono** (obligatorios) y datos opcionales (colores, WhatsApp, redes, analytics…). Todo queda guardado en `brief.md` en la carpeta del proyecto.
-2. Te hace unas preguntas sobre el cliente y te **recomienda 2-3 stacks** con pros, contras y costos. Elegís uno.
-3. Te propone **2-3 direcciones visuales**. Elegís una.
-4. Escribe el copy, arma la landing, corre un checklist de entrega y la revisa con capturas en mobile y desktop.
-5. Te ofrece publicarla (nunca la publica sin que confirmes).
+```mermaid
+flowchart LR
+    A[📋 Brief<br/>marca · rubro · tono] --> B[🧱 Stack<br/>2-3 opciones con costos]
+    B --> C[🎨 Dirección visual<br/>2-3 propuestas]
+    C --> D[✍️ Copy + código]
+    D --> E[🔍 Checklist y capturas<br/>mobile y desktop]
+    E --> F[🌐 Deploy<br/>solo si confirmás]
+```
 
-Cuando un cliente aprueba una landing, decile *"esta quedó aprobada"* y la registra en `aprobadas.md` para usarla como referencia con clientes parecidos.
+- **No usa plantillas**: la dirección visual sale de la skill [`frontend-design`](https://github.com/anthropics/skills) (se instala sola si no la tenés), aplicada al rubro y tono del cliente.
+- **Recomienda el stack** según el caso: HTML + Tailwind, Astro, Next.js, WordPress, no-code o tienda online, con pros, contras y costos.
+- Guías incluidas para **11 rubros** y **5 tonos** de copy en español.
+- Entrega con **checklist**: favicon, SEO y Open Graph, formulario, WhatsApp, analytics y links.
+- Cuando un cliente aprueba una landing, decile *"esta quedó aprobada"* y la usa de referencia para los próximos.
 
-> **Ojo al actualizar:** `aprobadas.md` vive dentro de la carpeta de la skill. Si actualizás con `npx skills update`, se reemplaza por la versión del repo y perdés tus entradas. Hacé una copia antes de actualizar.
+<details>
+<summary><b>Requisitos y detalles</b></summary>
 
-## tareas-facultad
+- Node.js y Python 3. Playwright para las capturas (la primera vez descarga su navegador).
+- Para el deploy, la cuenta y CLI de la plataforma elegida; si falta algo, te dice qué hacer.
+- ⚠️ `aprobadas.md` vive dentro de la skill: hacé una copia antes de `npx skills update`, porque se reemplaza.
 
-### Requisitos
-- Python 3 con `openpyxl` para generar el Excel (o el conector de Google Workspace si preferís Sheets).
-- Acceso al navegador para entrar al aula virtual, WhatsApp Web y el mail institucional (las sesiones ya tienen que estar iniciadas; la skill nunca ingresa contraseñas).
-- Opcional: conector de Slack si tu facultad lo usa.
+</details>
 
-### Cómo se usa
-1. **La primera vez** te pregunta qué materias cursás, dónde publica cada cátedra, cuál es tu casilla institucional y qué excepciones tenés (por ejemplo, materias donde las entregas las sube un solo integrante del grupo). Queda guardado y no te lo vuelve a preguntar.
-2. **Para relevar**, decile *"revisá la cátedra"* o *"actualizá mis tareas"*. Barre todas las fuentes, consolida y te manda la planilla con un bloque de **cambios desde la última corrida**.
-3. **Para encarar una entrega**, pedile *"dame un prompt para el TP de Redes"*. Busca la consigna real, lee los adjuntos, revisa si ya hay un avance circulando y te arma el prompt listo para pegar en otro chat.
+---
 
-La planilla trae una columna **Fuente** que dice de dónde salió cada dato, así sabés cuál puede estar desactualizado.
+## ❓ Preguntas frecuentes
 
-> **Ojo:** si una materia publica solo en un grupo de WhatsApp o en un repo de Git, ahí es donde aparecen las fechas que no están en ningún otro lado (parciales presenciales, cambios de clase). Por eso la skill barre todo y no solo el aula virtual.
+<details>
+<summary><b>¿Necesito saber programar?</b></summary>
 
-## Agregar una skill nueva
+No. Instalás con un comando y después le hablás a Claude normalmente. `landing-page` sí genera código, pero lo arma Claude.
+</details>
 
-Creá una carpeta `skills/<nombre-de-la-skill>/` con su `SKILL.md` y sumala a la tabla de arriba.
+<details>
+<summary><b>¿Funcionan en claude.ai o solo en Claude Code?</b></summary>
 
-## Licencia
+Están pensadas para Claude Code, porque usan archivos, scripts y el navegador.
+</details>
 
-[MIT](LICENSE)
+<details>
+<summary><b>¿Mis datos se suben a algún lado?</b></summary>
+
+No. Los apuntes, planillas y landings se guardan en tu computadora. Las skills no mandan nada a este repo.
+</details>
+
+<details>
+<summary><b>Quiero proponer una skill o encontré un error</b></summary>
+
+¡Buenísimo! Abrí un [issue](https://github.com/Valentino-git2305/claude-skills/issues). Para sumar una skill, creá `skills/<nombre>/SKILL.md` y mandá un pull request.
+</details>
+
+---
+
+<p align="center">
+  Hecho con ☕ y <a href="https://claude.com/claude-code">Claude Code</a> · <a href="LICENSE">MIT</a><br>
+  Si te sirvió, dejale una ⭐ al repo así le llega a más gente.
+</p>
