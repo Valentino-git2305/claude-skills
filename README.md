@@ -8,6 +8,7 @@ Skills para [Claude Code](https://claude.com/claude-code) que voy creando. Cada 
 |---|---|
 | [`clase-facultad`](skills/clase-facultad/) | Asistente en vivo para clases de la facu: le pasás los archivos de la clase, le vas contando lo que explica el profe, registra todo y al final genera un **HTML interactivo** (resumen, flashcards, autoevaluación, glosario, frases del profe) y un **PDF para imprimir**. |
 | [`landing-page`](skills/landing-page/) | Genera landing pages para clientes nuevos: pide marca, rubro y tono, **recomienda el stack** según el cliente, define la dirección visual con la skill `frontend-design`, escribe el copy, construye la landing (responsive, SEO, accesibilidad), la verifica con capturas y ofrece deploy. |
+| [`tareas-facultad`](skills/tareas-facultad/) | Junta en una sola planilla todo lo que tenés que entregar, aunque cada materia publique en un lugar distinto: **aula virtual, Slack, WhatsApp, repos de Git, mail de la facu**. Arma el Excel (o Google Sheets) con fechas, días restantes y de qué fuente salió cada dato, y cuando vas a encarar una entrega te busca la consigna y te **arma el prompt con todo el contexto**. |
 
 ## Cómo instalarlas
 
@@ -64,6 +65,22 @@ Todo queda en `~/Facultad/<Materia>/<fecha>-<tema>/`.
 Cuando un cliente aprueba una landing, decile *"esta quedó aprobada"* y la registra en `aprobadas.md` para usarla como referencia con clientes parecidos.
 
 > **Ojo al actualizar:** `aprobadas.md` vive dentro de la carpeta de la skill. Si actualizás con `npx skills update`, se reemplaza por la versión del repo y perdés tus entradas. Hacé una copia antes de actualizar.
+
+## tareas-facultad
+
+### Requisitos
+- Python 3 con `openpyxl` para generar el Excel (o el conector de Google Workspace si preferís Sheets).
+- Acceso al navegador para entrar al aula virtual, WhatsApp Web y el mail institucional (las sesiones ya tienen que estar iniciadas; la skill nunca ingresa contraseñas).
+- Opcional: conector de Slack si tu facultad lo usa.
+
+### Cómo se usa
+1. **La primera vez** te pregunta qué materias cursás, dónde publica cada cátedra, cuál es tu casilla institucional y qué excepciones tenés (por ejemplo, materias donde las entregas las sube un solo integrante del grupo). Queda guardado y no te lo vuelve a preguntar.
+2. **Para relevar**, decile *"revisá la cátedra"* o *"actualizá mis tareas"*. Barre todas las fuentes, consolida y te manda la planilla con un bloque de **cambios desde la última corrida**.
+3. **Para encarar una entrega**, pedile *"dame un prompt para el TP de Redes"*. Busca la consigna real, lee los adjuntos, revisa si ya hay un avance circulando y te arma el prompt listo para pegar en otro chat.
+
+La planilla trae una columna **Fuente** que dice de dónde salió cada dato, así sabés cuál puede estar desactualizado.
+
+> **Ojo:** si una materia publica solo en un grupo de WhatsApp o en un repo de Git, ahí es donde aparecen las fechas que no están en ningún otro lado (parciales presenciales, cambios de clase). Por eso la skill barre todo y no solo el aula virtual.
 
 ## Agregar una skill nueva
 
